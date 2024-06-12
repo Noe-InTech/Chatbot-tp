@@ -4,12 +4,11 @@ export class Bot2 extends Bot {
 	constructor() {
 		super('Robot conseil', 'https://api.adviceslip.com/advice');
 		this.commands = {
-			'advice': this.getAdvice,
-			'help': this.showHelp,
-			'robotimage': this.getRobotImage,
-			'transformers': this.getTransformersWiki,
-			'who': this.greet,
-
+			'advice': this.getAdvice.bind(this),
+			'help': this.showHelp.bind(this),
+			'robotimage': this.getRobotImage.bind(this),
+			'transformers': this.getTransformersWiki.bind(this),
+			'who': this.greet.bind(this),
 		};
 	}
 
@@ -40,8 +39,7 @@ export class Bot2 extends Bot {
 			const randomSeed = Math.floor(Math.random() * 1000);
 			const imageUrl = `https://robohash.org/${randomSeed}.png`;
 			return {
-				text: 'téma la taille du robot',
-				imageUrl: imageUrl
+				imageUrl
 			};
 		} catch (error) {
 			console.error('Error fetching robot image:', error);
@@ -64,8 +62,8 @@ export class Bot2 extends Bot {
 		const command = message.trim().toLowerCase();
 		if (command in this.commands) {
 			const response = await this.commands[command]();
-			if (command === 'robotimage') {
-				return `${response.text}\n${response.imageUrl}`;
+			if (command === 'robotimage' && response.imageUrl) {
+				return `${response.imageUrl}`;
 			}
 			return response;
 		} else {

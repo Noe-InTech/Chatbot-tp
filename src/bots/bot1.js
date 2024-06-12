@@ -62,6 +62,7 @@ export class Bot1 extends Bot {
 			return 'Commande non reconnue. Tapez "help" pour voir les commandes disponibles.';
 		}
 	}
+	
 	async greet() {
 		return "Bonjour à tous ! Je suis Chuck Novice.";
 	}

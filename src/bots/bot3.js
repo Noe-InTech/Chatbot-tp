@@ -7,10 +7,21 @@ export class Bot3 extends Bot {
 			'dog': this.getDogImage,
 			'help': this.showHelp,
 			'name': this.getRandomName,
-			'quote': this.getQuote,
+			'citation': this.getQuote,
 			'who': this.greet,
 
 		};
+	}
+
+	async getDogImage() {
+		try {
+			const response = await fetch('https://dog.ceo/api/breeds/image/random');
+			const data = await response.json();
+			return data.message;
+		} catch (error) {
+			console.error('Error fetching dog image:', error);
+			return 'Désolé, je n\'ai pas pu récupérer d\'image de chien pour le moment.';
+		}
 	}
 
 	async getRandomName() {
@@ -43,11 +54,11 @@ export class Bot3 extends Bot {
 	}
 
 	showHelp() {
-		return 'Commandes disponibles : dog, name, cute, help, who';
+		return 'Commandes disponibles : dog, name, citation (je suis un toutou inspiré), help, who';
 	}
 
 	showCommands() {
-		return 'Commandes disponibles : dog, name, cute';
+		return 'Commandes disponibles : dog, name, citation';
 	}
 
 	respondTo(message) {
