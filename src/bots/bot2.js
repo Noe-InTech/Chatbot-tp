@@ -8,7 +8,6 @@ export class Bot2 extends Bot {
 			'help': this.showHelp.bind(this),
 			'robotimage': this.getRobotImage.bind(this),
 			'transformers': this.getTransformersWiki.bind(this),
-			'who': this.greet.bind(this),
 		};
 	}
 
@@ -55,7 +54,7 @@ export class Bot2 extends Bot {
 	}
 
 	showHelp() {
-		return 'Commandes disponibles : advice, help, robotimage, transformers, who';
+		return 'Commandes disponibles : advice, help, robotimage, transformers, presentation (pour tous les autres bots)';
 	}
 
 	async respondTo(message) {
@@ -71,7 +70,5 @@ export class Bot2 extends Bot {
 		}
 	}
 
-	async greet() {
-		return "Bonjour à tous ! Je suis le Robot Conseil.";
-	}
+
 }

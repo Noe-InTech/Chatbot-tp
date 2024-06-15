@@ -25,41 +25,49 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 
 export async function handleSendMessage(bot, inputElement, messagesElement, botKey) {
-    const messageText = inputElement.value.trim();
-
-    if (messageText === '') {
-        return;
-    }
-
-    const timestamp = new Date().toLocaleTimeString();
-
-    const userMessage = {
-        sender: 'user',
-        text: messageText,
-        time: timestamp,
-    };
-
-    addMessageToChat(userMessage, messagesElement);
-    saveMessagesToLocalStorage(botKey, userMessage);
-
-    try {
-        const botResponse = await bot.respondTo(messageText);
-
-        const botMessage = {
-            sender: bot.name,
-            text: botResponse,
+    const message = inputElement.value.trim();
+    if (message !== '') {
+        const timestamp = new Date().toLocaleTimeString();
+        const userMessage = {
+            sender: 'user',
+            text: message,
             time: timestamp,
         };
+        addMessageToChat(userMessage, messagesElement);
+        saveMessagesToLocalStorage(botKey, userMessage);
+        console.log(`Message sauvegardé pour ${botKey}: `, userMessage);
 
-        addMessageToChat(botMessage, messagesElement);
-        saveMessagesToLocalStorage(botKey, botMessage);
+        if (message.toLowerCase() === 'presentation') {
+            const allBots = [bot1, bot2, bot3]; 
+            allBots.forEach(b => {
+                const botMessage = {
+                    sender: b.name,
+                    text: `Je suis ${b.name}`, 
+                    time: timestamp,
+                };
+                addMessageToChat(botMessage, messagesElement);
+                saveMessagesToLocalStorage(b.key, botMessage);
+            });
+        } else {
+            const botResponsePromise = bot.respondTo(message);
+            const botResponse = await botResponsePromise;
+            console.log("Retour du bot :", botResponse);
 
-    } catch (error) {
-        console.error('Error in bot response:', error);
+            if (botResponse) {
+                const botMessage = {
+                    sender: bot.name,
+                    text: botResponse,
+                    time: timestamp,
+                };
+                addMessageToChat(botMessage, messagesElement);
+                saveMessagesToLocalStorage(botKey, botMessage);
+            }
+        }
+
+        inputElement.value = '';
     }
-
-    inputElement.value = '';
 }
+
 
 document.getElementById('switch-to-bot1').addEventListener('click', function () {
     switchToBot('bot1');

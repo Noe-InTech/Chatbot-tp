@@ -8,7 +8,6 @@ export class Bot3 extends Bot {
 			'help': this.showHelp,
 			'name': this.getRandomName,
 			'citation': this.getQuote,
-			'who': this.greet,
 
 		};
 	}
@@ -54,7 +53,7 @@ export class Bot3 extends Bot {
 	}
 
 	showHelp() {
-		return 'Commandes disponibles : dog, name, citation (je suis un toutou inspiré), help, who';
+		return 'Commandes disponibles : dog, name, citation (je suis un toutou inspiré), help, presentation (pour tous les autres bots)';
 	}
 
 	showCommands() {
@@ -70,7 +69,5 @@ export class Bot3 extends Bot {
 		}
 	}
 
-	async greet() {
-		return "Bonjour à tous ! Je suis DogMan.";
-	}
+
 }

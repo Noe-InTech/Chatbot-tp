@@ -8,13 +8,12 @@ export class Bot1 extends Bot {
 			'help': this.showHelp,
 			'fact': this.getFact,
 			'joke': this.getJoke,
-			'who': this.greet,
 
 		};
 	}
 
 	sendPhoto() {
-		return 'images.6f062f1c.jpg';
+		return 'https://upload.wikimedia.org/wikipedia/commons/3/30/Chuck_Norris_May_2015.jpg';
 	}
 	async getFact() {
 		try {
@@ -51,7 +50,7 @@ export class Bot1 extends Bot {
 
 
 	showHelp() {
-		return 'Commandes disponibles : joke, help, photo, fact, who';
+		return 'Commandes disponibles : joke, help, photo, fact, presentation (pour tous les autres bots)';
 	}
 
 	respondTo(message) {
@@ -63,7 +62,5 @@ export class Bot1 extends Bot {
 		}
 	}
 
-	async greet() {
-		return "Bonjour à tous ! Je suis Chuck Novice.";
-	}
+
 }

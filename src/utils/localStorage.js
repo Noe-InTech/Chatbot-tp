@@ -47,7 +47,6 @@ export async function addMessageToChat(message, messagesElement) {
     messagesElement.scrollTop = messagesElement.scrollHeight;
 }
 
-// Fonction pour obtenir l'URL de l'avatar
 function getAvatarUrl(sender) {
     const avatarKey = `avatar_${sender}`;
     let avatarUrl = localStorage.getItem(avatarKey);
@@ -58,17 +57,14 @@ function getAvatarUrl(sender) {
     return avatarUrl;
 }
 
-// Fonction pour générer une URL d'avatar aléatoire pour les bots
 function generateAvatarUrl(sender) {
     if (sender === 'Chuck Norris') {
-        return "images.6f062f1c.jpg"; // Avatar statique pour Chuck Norris
-    } else {
-        // Générer une URL d'avatar aléatoire pour les autres bots
+		return "https://upload.wikimedia.org/wikipedia/commons/3/30/Chuck_Norris_May_2015.jpg"; 
+	    } else {
         return `https://randomuser.me/api/portraits/${Math.random() < 0.5 ? 'men' : 'women'}/${Math.floor(Math.random() * 100)}.jpg`;
     }
 }
 
-// Fonction pour vérifier si une URL est une image valide
 function isValidImageUrl(url) {
     return url.match(/\.(jpeg|jpg|gif|png)$/) != null;
 }

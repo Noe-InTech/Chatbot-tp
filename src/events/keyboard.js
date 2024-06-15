@@ -8,7 +8,7 @@ export function initializeKeyboardEvents(inputElement, messagesElement, bot, bot
 
     inputElement.addEventListener('keydown', (event) => {
         if (event.key === 'Enter') {
-            event.preventDefault(); // Prevents the default form submission
+            event.preventDefault(); 
             handleSendMessage(bot, inputElement, messagesElement, botKey);
         }
     });
