@@ -1,17 +1,15 @@
-// keyboard.js
-
 import { handleSendMessage } from '../../main.js';
 
-export function initializeKeyboardEvents(inputElement, messagesElement, bot) {
-	document.addEventListener('DOMContentLoaded', function () {
-		if (inputElement) {
-			inputElement.addEventListener('keydown', (event) => {
-				if (event.key === 'Enter') {
-					handleSendMessage(bot, inputElement, messagesElement, bot.key);
-				}
-			});
-		} else {
-			console.error("L'élément input n'a pas été trouvé.");
-		}
-	});
+export function initializeKeyboardEvents(inputElement, messagesElement, bot, botKey) {
+    if (!inputElement) {
+        console.error("L'élément input n'a pas été trouvé.");
+        return;
+    }
+
+    inputElement.addEventListener('keydown', (event) => {
+        if (event.key === 'Enter') {
+            event.preventDefault(); // Prevents the default form submission
+            handleSendMessage(bot, inputElement, messagesElement, botKey);
+        }
+    });
 }

@@ -2,15 +2,29 @@ import { Bot } from '../classes/Bot';
 
 export class Bot1 extends Bot {
 	constructor() {
-		super('Chuck Norris', 'https://api.chucknorris.io/jokes/random');
+		super('Chuck Norris', 'https://dog.ceo/api/breeds/image/random');
 		this.commands = {
-			'joke': this.getJoke,
-			'help': this.showHelp,
 			'photo': this.sendPhoto,
+			'help': this.showHelp,
 			'fact': this.getFact,
+			'joke': this.getJoke,
 			'who': this.greet,
 
 		};
+	}
+
+	sendPhoto() {
+		return 'images.6f062f1c.jpg';
+	}
+	async getFact() {
+		try {
+			const response = await fetch('https://uselessfacts.jsph.pl/random.json?language=en');
+			const data = await response.json();
+			return data.text; 
+		} catch (error) {
+			console.error('Error fetching fact:', error);
+			return 'Désolé, je ne peux pas trouver de fait intéressant pour le moment.';
+		}
 	}
 
 	showInitialMessage(messagesElement) {
@@ -35,20 +49,6 @@ export class Bot1 extends Bot {
 		}
 	}
 
-	sendPhoto() {
-		return 'images.6f062f1c.jpg';
-	}
-
-	async getFact() {
-		try {
-			const response = await fetch('https://uselessfacts.jsph.pl/random.json?language=en');
-			const data = await response.json();
-			return data.text; // Retourne directement le texte du fait
-		} catch (error) {
-			console.error('Error fetching fact:', error);
-			return 'Désolé, je ne peux pas trouver de fait intéressant pour le moment.';
-		}
-	}
 
 	showHelp() {
 		return 'Commandes disponibles : joke, help, photo, fact, who';
@@ -62,9 +62,8 @@ export class Bot1 extends Bot {
 			return 'Commande non reconnue. Tapez "help" pour voir les commandes disponibles.';
 		}
 	}
-	
+
 	async greet() {
 		return "Bonjour à tous ! Je suis Chuck Novice.";
 	}
-
 }
